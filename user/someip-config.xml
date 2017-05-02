@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scenario>
+  <NetworkPlan>
+    <NetworkDefinition id="3" name="switch" type="SwitchNode"/>
+    <Node id="1" name="client" type="PC">
+      <interface name="eth0" net="switch">
+        <address type="mac">00:00:00:aa:00:02</address>
+        <address>192.168.56.101/24</address>
+        <address>2001::20/64</address>
+      </interface>
+    </Node>
+    <Node id="2" name="server" type="PC">
+      <interface name="eth0" net="switch">
+        <address type="mac">00:00:00:aa:00:03</address>
+        <address>192.168.56.102/24</address>
+        <address>2001::21/64</address>
+      </interface>
+    </Node>
+  </NetworkPlan>
+  <MotionPlan>
+    <Node name="switch">
+      <motion type="stationary">
+        <point>411,59</point>
+      </motion>
+    </Node>
+    <Node name="client">
+      <motion type="stationary">
+        <point>193,115</point>
+      </motion>
+    </Node>
+    <Node name="server">
+      <motion type="stationary">
+        <point>595,120</point>
+      </motion>
+    </Node>
+  </MotionPlan>
+  <ServicePlan/>
+  <CoreMetaData>
+    <MetaData>
+      <param name="global_options">interface_names=no ip_addresses=yes ipv6_addresses=yes node_labels=yes link_labels=yes show_api=no background_images=no annotations=yes grid=yes traffic_start=0</param>
+      <param name="canvas c1">{name {Canvas1}}</param>
+    </MetaData>
+  </CoreMetaData>
+</Scenario>

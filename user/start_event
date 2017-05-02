@@ -1,0 +1,50 @@
+#!/bin/sh
+
+
+#First argument, holds the applications to run
+APP=$1
+ARGS=""
+
+# ARGS holds the remaining arguments , except the first one
+if [ -n "$1" ]
+then
+	shift
+	ARGS="$@"	
+fi
+
+case $APP in
+
+	local-server)
+		export VSOMEIP_CONFIGURATION=../config/vsomeip-local.json
+		export VSOMEIP_APPLICATION_NAME=service-sample
+		../build/examples/./notify-sample
+		;;
+
+	server)
+		export VSOMEIP_CONFIGURATION=../config/vsomeip-udp-service.json
+		export VSOMEIP_APPLICATION_NAME=service-sample
+		../build/examples/./notify-sample
+		;;		
+
+	local-client)
+		export VSOMEIP_CONFIGURATION=../config/vsomeip-local.json
+		export VSOMEIP_APPLICATION_NAME=client-sample
+		../build/examples/./subscribe-sample
+		;;
+
+	client)
+		export VSOMEIP_CONFIGURATION=../config/vsomeip-udp-client.json
+		export VSOMEIP_APPLICATION_NAME=client-sample
+		../build/examples/./subscribe-sample
+		;;	
+
+	multicast-config)
+		sudo route add -net 224.0.0.0/4 dev eth0
+		;;
+
+	*)
+		echo "Unknown application - bailing."
+		exit
+esac
+
+
